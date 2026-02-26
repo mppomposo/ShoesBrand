@@ -112,8 +112,9 @@ def upsert_to_supabase(df, table_name: str, batch_size: int = 500):
         # --- 2) Borrar datos existentes (equivalente a if_exists='replace') ---
         print(f"   🗑️  Vaciando tabla '{table_name}' (replace mode)...")
         try:
-            # Supabase no tiene TRUNCATE vía client; usamos delete con filtro amplio
+            # Borrar en dos pasadas para cubrir NULLs y no-NULLs
             supabase.table(table_name).delete().gte("order_id", 0).execute()
+            supabase.table(table_name).delete().is_("order_id", "null").execute()
             print(f"   ✅ Tabla vaciada correctamente")
         except Exception as e:
             print(f"   ⚠️  No se pudo vaciar la tabla (puede estar vacía o no existir): {e}")
