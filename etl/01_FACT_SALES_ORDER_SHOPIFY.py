@@ -776,6 +776,9 @@ if all_orders:
     # Añadir columna last_updated
     df_final_clean['last_updated'] = datetime.now().isoformat()
     
+    # Normalizar nombres de columna a minúsculas (PostgreSQL/Supabase los almacena así)
+    df_final_clean.columns = df_final_clean.columns.str.lower()
+    
     # Volcar a Supabase
     upsert_to_supabase(df_final_clean, TARGET_TABLE)
 
