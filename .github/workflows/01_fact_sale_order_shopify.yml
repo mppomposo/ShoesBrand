@@ -27,4 +27,4 @@ jobs:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         
-      run: etl/01_FACT_SALES_ORDER_SHOPIFY.py
+      run: python etl/01_FACT_SALES_ORDER_SHOPIFY.py
