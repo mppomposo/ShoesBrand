@@ -17,7 +17,7 @@ jobs:
     
     - name: Instalar dependencias
       run: |
-        pip install -r requirements.txt
+        pip install -r etl/requirements.txt
     
     - name: Ejecutar ETL
       env:
