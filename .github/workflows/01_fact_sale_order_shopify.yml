@@ -1,0 +1,30 @@
+name: 01 fact sale order shopify
+
+on:
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Instalar dependencias
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Ejecutar ETL
+      env:
+        SHOP_NAME: ${{ secrets.SHOP_NAME }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        API_VERSION: ${{ secrets.API_VERSION }}
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        
+      run: etl/01_FACT_SALES_ORDER_SHOPIFY.py
