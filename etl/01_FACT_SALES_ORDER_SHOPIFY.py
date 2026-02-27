@@ -583,7 +583,7 @@ def procesar_devoluciones(df_orders):
 
                         linea['LineValue'] = item_subtotal_value
                         linea['ShippingAllocated'] = item_charge_distributed
-                        linea['FinalLineValue'] = (linea['LineValue'] + linea['ShippingAllocated']).round(5)
+                        linea['FinalLineValue'] = round(linea['LineValue'] + linea['ShippingAllocated'],5)
 
                         linea['Bruto_euros'] = linea['FinalLineValue']
 
