@@ -1,6 +1,12 @@
 name: 01 fact sale order shopify
 
 on:
+  schedule:
+    # Horario de VERANO (marzo a octubre): 12:50 y 21:50 UTC
+    - cron: '50 12,21 * 3-10 *'
+    # Horario de INVIERNO (noviembre a febrero): 13:50 y 22:50 UTC
+    - cron: '50 13,22 * 11-2 *'
+
   workflow_dispatch:  # Permite ejecución manual
 
 jobs:
